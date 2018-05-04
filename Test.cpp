@@ -17,3 +17,39 @@ unsigned count_of_bits(unsigned value)
 	}
 	return ++count;
 }
+
+struct node_t {
+	node_t * next;
+	int value;
+};
+
+//   2      1      0
+// +---+  +---+  +---+
+// | 1 |->| 2 |->| 3 |
+// +---+  +---+  +---+
+
+node_t * node_from_back(node_t * head, unsigned int idx)
+{
+	unsigned int len = 0;
+	if (head) {
+		len++;
+		node_t * vetka = head;
+		while (vetka->next)
+		{
+			vetka = vetka->next;
+			len++;
+		}
+		idx = len - idx;
+		while (1) 
+		{
+			vetka = head;
+			if (idx) 
+			{
+				vetka = vetka->next;
+				idx--;
+			}
+			else return vetka;
+		}
+	}
+	else return nullptr;
+}
